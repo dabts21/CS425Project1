@@ -19,7 +19,7 @@ import org.json.simple.JSONValue;
 
 public class Database {
     
-    String sessID;
+    String sesID;
     
     private Connection getConnection() {
         
@@ -33,10 +33,8 @@ public class Database {
             conn = ds.getConnection();
             
         }        
-        catch (Exception stinkystinky) { stinkystinky.printStackTrace(); }
-        
+        catch (Exception exp) { exp.printStackTrace(); }
         return conn;
-
     }
     
     public String getQueryResults(String sessionID) throws SQLException {
@@ -45,22 +43,19 @@ public class Database {
         StringBuilder tbl = new StringBuilder();
         String query;
         
-        this.sessID = sessionID;
-        Connection defcon = getConnection();
+        this.sesID = sessionID;
+        Connection aconn = getConnection();
         
         query = "SELECT * FROM registrations r WHERE sessionid = ?;";
         
         try { 
-            PreparedStatement statement = defcon.prepareStatement(query);
-            statement.setString(0, sessID);
+            PreparedStatement statement = aconn.prepareStatement(query);
+            statement.setString(0, sesID);
             
             if (statement.execute()) {
                 ResultSet result = statement.getResultSet();
                 
-                //  MAKE TABLE
                 tbl.append("<table>");
-                
-                //POPULATE TABLE
                 
                 while (result.next()){
                     
@@ -81,8 +76,57 @@ public class Database {
             
             
         }
-        catch(Exception blahblahblah){System.err.println(blahblahblah);}
+        catch(Exception exptwo){System.err.println(exptwo);}
         return (tbl.toString());
     }
-    
+       
+    public String registrationAdd(String fName, String lName, String displayName, String sessionID) throws SQLException{
+
+        int id = 0;
+        int result = 0;
+        String query;
+        String registrationCode;
+        ResultSet keys;
+        JSONObject json = new JSONObject();
+        String results = "";
+        
+        query = "INSERT INTO registrations (firstname, lastname, displayname, sessionid)"  + "VALUES (?, ?, ?, ?); ";
+        Connection aconn = getConnection();
+        
+        try {
+            PreparedStatement p_statement = aconn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+            
+            p_statement.setString(0, fName);
+            p_statement.setString(1, lName);
+            p_statement.setString(2, displayName);
+            p_statement.setString(3, sessionID);
+            
+            result = p_statement.executeUpdate();
+            
+            if (result ==1){
+                
+                keys = p_statement.getGeneratedKeys();
+                if (keys.next()){
+                    id = keys.getInt(1);
+                }    
+            }
+            
+            String rcode = String.format("%06d", id);
+            registrationCode = "R";
+            registrationCode += rcode;
+            json.put("registration_code", registrationCode);
+            json.put("displayname", displayName);
+            
+            results = JSONValue.toJSONString(json);
+            
+        }
+        catch(Exception expthree){
+            System.out.println(expthree.toString());
+        }
+           
+            return (results.trim());
+        
+        }
+       
 }
+
