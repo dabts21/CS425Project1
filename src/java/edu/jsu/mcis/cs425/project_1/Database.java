@@ -24,13 +24,12 @@ public class Database {
     private Connection getConnection() {
         
         Connection conn = null;
-        
         try {
             
             Context envContext = new InitialContext();
             Context initContext  = (Context)envContext.lookup("java:/comp/env");
-            DataSource ds = (DataSource)initContext.lookup("jdbc/db_pool");
-            conn = ds.getConnection();
+            DataSource datas = (DataSource)initContext.lookup("jdbc/db_pool");
+            conn = datas.getConnection();
             
         }        
         catch (Exception exp) { exp.printStackTrace(); }
@@ -84,8 +83,10 @@ public class Database {
 
         int id = 0;
         int result = 0;
-        String query;
+        
         String registrationCode;
+        String query;
+        
         ResultSet keys;
         JSONObject json = new JSONObject();
         String results = "";

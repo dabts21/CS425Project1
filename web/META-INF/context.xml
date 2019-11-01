@@ -1,2 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/CS425_Project1"/>
+    
+<Context path="/CS425_Project1">
+    
+  <Resource auth="Container" 
+            autoReconnect="true" 
+            driverClassName="com.mysql.jdbc.Driver" 
+            initialSize="10" 
+            logAbandoned="true"
+            maxActive="100"
+            maxIdle="30" 
+            maxWait="10000" 
+            name="jdbc/db_pool"
+            password="CS425!Lab3B" 
+            removeAbandoned="true" 
+            removeAbandonedTimeout="60"
+            testOnBorrow="true"
+            testOnReturn="false"
+            type="javax.sql.DataSource" 
+            url="jdbc:mysql://localhost:3306/registration_db?zeroDateTimeBehavior=convertToNull&amp;allowMultiQueries=true"
+            useSSL="false"
+            username="db_user"
+            validationQuery="SELECT 1"
+            validationQueryTimeout="-1"/>
+            
+</Context>

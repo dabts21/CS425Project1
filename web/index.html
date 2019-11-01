@@ -1,13 +1,52 @@
-
-
+<!DOCTYPE html>
 
 <html>
+    
     <head>
-        <title>TODO supply a title</title>
+        <title>Registration </title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <script type="text/javascript" src="Scripts/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="Scripts/Registration.js"></script>
+        
     </head>
-    <body>
-        <div>TODO write content</div>
+    
+    <body>  
+        <a href="index.html">Search Registrations</a>
+        <a href="RegistrationHTML.html">Register Attendee</a>
+        
+        <form name="search" id="search" action="#">
+            
+            <fieldset>
+                
+                <legend>Search registrations</legend>
+                
+                <label for="input">Select Session:</label>
+                
+                <select name="session" id="session">
+                    <option value="1">Session 1</option>
+                    <option value="2">Session 2</option>
+                    <option value="3">Session 3</option>
+                    <option value="4">Session 4</option>   
+                </select>
+                
+                <input type="button" value="Submit" onclick="Registration.submit();">
+                
+            </fieldset>
+                    
+        </form>
+        
+        
+        
+        <div id="output1">
+            
+            <p id="paragraph"></p>    
+        </div>
+        
+        <script type="text/javascript">
+            $(document).ready( Registration.init );
+        </script>
+        
     </body>
+    
 </html>

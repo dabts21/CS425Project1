@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+        
+        <title>Register</title>
+        <meta charset="UTF-8">
+        
+        <script type="text/javascript" src="Scripts/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="Scripts/Registration.js"></script>
+        
+    </head>
+    
+    <body>
+
+        <a href="index.html">Search Registrations</a>
+        <a href="RegistrationHTML.html">Register Attendee</a>
+        
+        <form name="registration-form" id="registration-form" action="#">
+            
+            <fieldset>
+                
+                <legend>Search Registrations</legend>
+                
+                <p>
+                    
+                    <label for="input">First Name:</label>
+                    <input type="text" name="firstname" class="name" id="fname">
+                    
+                </p>
+                
+                <p>
+                    
+                    <label for="input">Last Name:</label>
+                    <input type="text" name="lastname" class="name" id="lname">
+                    
+                </p>
+                
+                
+                <p>
+                    
+                    <label for="input">How your name will be displayed:</label>
+                    <input type="text" name="displayname" id="dname">
+                    
+                </p>
+                
+                <p>
+                    
+                    <label for="input">Select Session:</label>
+                    
+                    <select name="session" id="session">
+                    
+                        <option value="1">Session 1</option>
+                        <option value="2">Session 2</option>
+                        <option value="3">Session 3</option>
+                        <option value="4">Session 4</option>
+                    
+                    </select>
+                    
+                </p>
+                
+                <input type="button" value="Submit" onclick="Registration.register();">
+                
+            </fieldset>
+                    
+        </form>
+        
+        <div id="output1">
+            
+            <p id="paragraph"></p>
+            
+        </div>
+        
+        <script type="text/javascript">
+            
+            $(document).ready( Registration.init );
+            
+            $('.name').change(function(){
+                var firstname = $('#fname').val();
+                var lastname = $('#lname').val();
+                var displayname = firstname + " " + lastname;
+                $('#dname').val(displayname);
+                
+            });
+            
+            
+        </script>
+        
+    </body>
+    
+</html>

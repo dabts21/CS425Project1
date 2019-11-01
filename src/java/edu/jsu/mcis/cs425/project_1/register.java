@@ -24,7 +24,6 @@ public class register extends HttpServlet {
                 String stuff = request.getParameter("rcode");
 
                 String[] args = stuff.split(";");
-
                 
                 String fname = args[0];
                 String lname = args[1];
